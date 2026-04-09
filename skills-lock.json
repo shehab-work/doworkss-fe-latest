@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "nuxt": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "computedHash": "6f5456948b35c0c0005424098eaf28ebbba1bbd92a3f3268466fe7d85e9e3789"
+    }
+  }
+}
