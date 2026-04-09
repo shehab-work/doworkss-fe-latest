@@ -4,13 +4,13 @@
 
 ## Todos
 
-- [ ] Create all `app/` subdirectories
-- [ ] Create `server/` directories
-- [ ] Create `shared/` directories
-- [ ] Create `i18n/locales/` directory (i18n v10 requirement)
-- [ ] Create `tests/` directories
-- [ ] Create `e2e/` directory (Playwright)
-- [ ] Verify structure matches Nuxt 4 conventions
+- [x] Create all `app/` subdirectories
+- [x] Create `server/` directories
+- [x] Create `shared/` directories
+- [x] Create `i18n/locales/` directory (i18n v10 requirement)
+- [x] Create `tests/` directories
+- [x] Create `e2e/` directory (Playwright)
+- [x] Verify structure matches Nuxt 4 conventions
 
 > **Deferred:** Sentry config files at root (`sentry.client.config.ts`, `sentry.server.config.ts`) — create in Sprint 7 when installing @sentry/nuxt.
 

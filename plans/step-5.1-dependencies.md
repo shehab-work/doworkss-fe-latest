@@ -10,12 +10,12 @@ Everything else is deferred to the sprint where it's actually used.
 
 ## Todos
 
-- [ ] Install UI framework deps
-- [ ] Install state management deps
-- [ ] Install i18n deps
-- [ ] Install testing deps
-- [ ] Verify `pnpm dev` starts without errors
-- [ ] Verify no peer dependency warnings
+- [x] Install UI framework deps
+- [x] Install state management deps
+- [x] Install i18n deps
+- [x] Install testing deps — `@nuxt/test-utils@4.0.0` (4.0.1 has `workspace:*` packaging bug)
+- [x] Verify `pnpm dev` starts without errors
+- [x] Verify no peer dependency warnings
 
 ## Install Commands
 
