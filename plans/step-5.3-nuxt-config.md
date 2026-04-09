@@ -4,10 +4,12 @@
 
 ## Todos
 
-- [ ] Replace current minimal nuxt.config.ts with full config
-- [ ] Verify all module names are correct
-- [ ] Verify runtimeConfig env var names match .env.example
-- [ ] Verify routeRules match page structure
+- [x] Replace current minimal nuxt.config.ts with full config
+- [x] Verify all module names are correct — verified via Context7 docs
+- [x] Verify runtimeConfig env var names match .env.example
+- [x] Verify routeRules match page structure
+- [x] Fix: removed invalid `defaultTheme` from `ssrClientHints.prefersColorSchemeOptions` (not in API)
+- [x] Fix: commented out `~/assets/scss/main.scss` CSS (file doesn't exist until Step 5.5)
 
 ## Full nuxt.config.ts
 

@@ -5,13 +5,15 @@
 
 ## Todos
 
-- [ ] Create `vuetify.config.ts` at project root
-- [ ] Audit old `assets/scss/base/vutifay-variables.scss` for custom color values
-- [ ] Map old SCSS variables to Vuetify 4 theme colors
-- [ ] Configure RTL locales (ar, ur)
-- [ ] Set `defaultTheme: 'light'` (Vuetify 4 defaults to `system`)
-- [ ] Set component defaults matching current design
-- [ ] Verify theme renders correctly in dev
+- [x] Create `vuetify.config.ts` at project root
+- [x] Audit old `config/vuetify.options.js` for custom color values (40+ color tokens mapped)
+- [x] Map old theme colors to Vuetify 4 theme — all colors from old config preserved
+- [x] Configure RTL locales (ar, ur)
+- [x] Set `defaultTheme: 'light'` (Vuetify 4 defaults to `system`)
+- [x] Set component defaults matching current design
+- [x] Verify theme renders correctly in dev
+- [x] Fix: added `dark` theme (required by `ssrClientHints.prefersColorScheme`)
+- [x] Create `app/plugins/i18n-vuetify-sync.ts` — RTL sync on locale switch
 
 ## vuetify.config.ts
 
