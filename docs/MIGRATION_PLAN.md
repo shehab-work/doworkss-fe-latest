@@ -1,7 +1,7 @@
 # Doworkss Migration Execution Plan: Nuxt 2 → Nuxt 4
 
 > **Source repo:** `doworkss_frontend/` (Nuxt 2.15.8, Vue 2, Vuetify 2, Vuex)
-> **Target repo:** `doworkss-FE-latest/` (Nuxt 4.4+, Vue 3.5+, Vuetify 3, Pinia)
+> **Target repo:** `doworkss-FE-latest/` (Nuxt 4.4+, Vue 3.5+, Vuetify 4, Pinia)
 > **Reference:** `doworkss_frontend/docs/UPGRADE_PART_ONE.md` (architecture decisions, detailed appendices)
 > **Created:** 2026-04-08
 > **Validated:** 2026-04-09 — See `PLAN_VALIDATION_REPORT.md` for full verification results
@@ -18,7 +18,7 @@ Already in place:
 
 Not yet configured:
 - No pages, components, composables, plugins, middleware, layouts, server routes
-- No UI framework (Vuetify 3)
+- No UI framework (Vuetify 4)
 - No state management (Pinia)
 - No i18n, auth, API layer, or any business logic
 - No `.env` or environment configuration
@@ -73,50 +73,23 @@ Not yet configured:
 
 > All work below happens in `doworkss-FE-latest/`. This is the scaffold sprint.
 
-### Step 5.1: Core Dependencies
+### Step 5.1: Core Dependencies (Scaffold Only)
 
-> **VALIDATED 2026-04-09:** Versions and package names verified against npm registry.
+> **VALIDATED 2026-04-09:** Versions verified. Sprint 5 installs only what the scaffold needs.
+> See `plans/step-5.1-dependencies.md` for full details + deferred package schedule.
 
 ```bash
-# UI Framework
-pnpm add vuetify vuetify-nuxt-module @mdi/font
+# Runtime (scaffold only)
+pnpm add vuetify@latest vuetify-nuxt-module@0.19.5 @mdi/font \
+  @pinia/nuxt@0.11.3 pinia@3.0.4 pinia-plugin-persistedstate@4.7.1 \
+  @nuxtjs/i18n@10.2.4
 
-# State Management
-pnpm add @pinia/nuxt pinia-plugin-persistedstate
-
-# Auth Session Management (sealed cookies)
-pnpm add nuxt-auth-utils
-
-# i18n (v10 is latest stable — do NOT use @next)
-pnpm add @nuxtjs/i18n
-
-# Security
-pnpm add nuxt-security
-
-# Analytics
-pnpm add nuxt-gtag
-
-# Utilities
-pnpm add @vueuse/nuxt
-
-# Toast Notifications
-pnpm add vue-toastification
-
-# Validation
-pnpm add vee-validate @vee-validate/rules @vee-validate/i18n
-
-# Input masking
-pnpm add maska
-
-# Real-time & messaging (framework-agnostic, keep as-is)
-pnpm add pusher-js firebase
-
-# Sanitization
-pnpm add isomorphic-dompurify
-
-# Testing
-pnpm add -D vitest @vue/test-utils happy-dom @nuxt/test-utils @playwright/test
+# Dev
+pnpm add -D vitest@4.1.3 @vue/test-utils@2.4.6 happy-dom@20.8.9 \
+  @nuxt/test-utils@4.0.1 @playwright/test@1.59.1
 ```
+
+> **Deferred:** nuxt-auth-utils (Sprint 6), @sentry/nuxt + vee-validate + maska + firebase + isomorphic-dompurify + nuxt-gtag (Sprint 7), pusher-js (Sprint 10), nuxt-security (Sprint 13)
 
 ### Step 5.2: Directory Structure
 
@@ -130,7 +103,7 @@ doworkss-FE-latest/
 │   │   │   ├── main.scss
 │   │   │   ├── _global.scss
 │   │   │   ├── _utils.scss
-│   │   │   ├── _vuetify-override.scss    # Rewritten for Vuetify 3
+│   │   │   ├── _vuetify-override.scss    # Rewritten for Vuetify 4
 │   │   │   └── base/
 │   │   │       ├── custom-variables.scss
 │   │   │       ├── helper.scss
@@ -353,7 +326,7 @@ export default defineNuxtConfig({
 })
 ```
 
-### Step 5.4: Vuetify 3 Config
+### Step 5.4: Vuetify 4 Config
 
 Create `vuetify.config.ts` at project root (auto-detected by vuetify-nuxt-module):
 
@@ -400,7 +373,7 @@ export default defineVuetifyConfiguration({
 ### Step 5.5: Copy & Adapt Assets
 
 - [ ] Copy `locales/*.json` (6 files) → `locales/`
-- [ ] Copy `assets/scss/` → `app/assets/scss/` (rewrite `vutifay-variables.scss` to match Vuetify 3 theme, rewrite `_vuetify-override.scss` for Vuetify 3 selectors)
+- [ ] Copy `assets/scss/` → `app/assets/scss/` (rewrite `vutifay-variables.scss` to match Vuetify 4 theme, rewrite `_vuetify-override.scss` for Vuetify 4 selectors)
 - [ ] Copy used icons from `assets/icons/` → `app/assets/icons/` (skip 48 dead files)
 - [ ] Copy used images from `assets/images/` + `assets/imgs/` → `app/assets/images/` (consolidated, skip duplicates and dead files)
 - [ ] Copy used SVGs from `assets/svg/` → `app/assets/svg/` (skip 20 dead files)
@@ -560,7 +533,7 @@ export default defineConfig({
 ### Step 5.9: Verify Foundation
 
 - [ ] `pnpm dev` starts without errors
-- [ ] Vuetify 3 renders a basic page with RTL support
+- [ ] Vuetify 4 renders a basic page with RTL support
 - [ ] i18n switches between ar/en correctly
 - [ ] `useRuntimeConfig()` reads env vars
 - [ ] `pnpm test` runs (even with zero tests)
@@ -818,7 +791,7 @@ Register rules with `defineRule`, configure i18n with `@vee-validate/i18n`.
 > - `this.$auth` → `useAuth()`
 > - `this.$t()` → `$t()` in template, `useI18n().t()` in script
 > - `this.$router` → `useRouter()`
-> - Vuetify 2 components → Vuetify 3 API (see Appendix A)
+> - Vuetify 2 components → Vuetify 4 API
 > - `v-if="getIsMobile"` → CSS `d-none d-md-block`
 > - `process.client` → `import.meta.client`
 > - `localStorage.*` → `useCookie()` or `useState()`
@@ -1111,7 +1084,7 @@ If you're starting now, here's what to do **today**:
    - Install dependencies (Step 5.1)
    - Create directory structure (Step 5.2)
    - Configure `nuxt.config.ts` (Step 5.3)
-   - Set up Vuetify 3 config (Step 5.4)
+   - Set up Vuetify 4 config (Step 5.4)
    - Copy assets and locales (Step 5.5)
    - Create `.env.example` and `.env` (Step 5.7)
    - Verify `pnpm dev` works
@@ -1129,7 +1102,7 @@ If you're starting now, here's what to do **today**:
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
 | Auth regression | High | Critical | Test auth composable exhaustively before page migration |
-| Vuetify 3 visual differences | High | Medium | Visual comparison against Nuxt 2 for every page |
+| Vuetify 4 visual differences | High | Medium | Visual comparison against Nuxt 2 for every page |
 | SSR hydration mismatches | Medium | Medium | Check console on every page, use `import.meta.client` guards |
 | Performance regression | Medium | Medium | Lighthouse on every sprint, bundle size monitoring |
 | i18n/RTL breakage | Medium | High | Test all 6 locales, especially ar/ur RTL |
