@@ -11,6 +11,8 @@
 - [x] Create `tests/` directories
 - [x] Create `e2e/` directory (Playwright)
 - [x] Verify structure matches Nuxt 4 conventions
+- [x] Create `app/error.vue` — Nuxt 4 global error page (404/403/500)
+- [x] Create `shared/constants/index.ts` — TypeScript conversion of old const.js
 
 > **Deferred:** Sentry config files at root (`sentry.client.config.ts`, `sentry.server.config.ts`) — create in Sprint 7 when installing @sentry/nuxt.
 
