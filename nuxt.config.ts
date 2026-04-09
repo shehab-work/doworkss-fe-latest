@@ -44,11 +44,11 @@ export default defineNuxtConfig({
   // ── SSR + Route Rules ────────────────────────────
   ssr: true,
   routeRules: {
-    // Prerender static pages at build
-    '/about-us': { prerender: true },
-    '/privacy-policy': { prerender: true },
-    '/terms-and-conditions': { prerender: true },
-    '/faq': { prerender: true },
+    // Prerender static pages at build — uncomment when pages exist (Sprint 8+)
+    // '/about-us': { prerender: true },
+    // '/privacy-policy': { prerender: true },
+    // '/terms-and-conditions': { prerender: true },
+    // '/faq': { prerender: true },
 
     // ISR for SEO-critical dynamic pages
     '/services/**': { isr: 3600 },
